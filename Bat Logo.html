@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bat Logo</title>
+<style>
+:root{--bg:#ffffff;--ink:#000000;--muted:#6b6b72;--accent:#000000;--panel:#ffffffcc;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Courier New',monospace;overflow:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+main{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px;box-sizing:border-box}
+#logo{position:relative;transform-style:preserve-3d;will-change:transform;width:min(80vw,520px);aspect-ratio:2350/765;border:0;background:transparent;padding:0;cursor:pointer}
+#logo img{width:100%;height:100%;display:block;object-fit:contain}
+h1{margin:0;font-size:20px;font-weight:400}
+body{transition:background .35s}
+#c2{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}
+.bar{align-items:center}
+.bar button.sw{width:30px;height:30px;padding:0;border-radius:50%;border:2px solid #000;backdrop-filter:none}
+.bar button.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px #000}
+@media (max-width:600px){#logo{width:56vw}}
+.hint{position:fixed;z-index:3;top:0;left:0;right:0;text-align:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px 0;font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,'Courier New',monospace;letter-spacing:.08em;pointer-events:none}
+.bar{position:fixed;z-index:3;left:0;right:0;bottom:0;display:flex;gap:10px;justify-content:center;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.bar button{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,'Courier New',monospace;padding:9px 14px;border-radius:999px;border:1px solid #000;background:#000;color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
+.bar button:not(.sw):hover{background:#262626;border-color:#262626;color:#fff}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="hint">Click the logo</div>
+<main>
+  <button id="logo" aria-label="Logo: click to release bats"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjM1MCIgaGVpZ2h0PSI3NjUiIHZpZXdCb3g9IjAgMCAyMzUwIDc2NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2OTEuMjIgMzQzLjg0M0wxNTA2Ljc1IDM4LjE3NDdDMTQ5MS4yMiAxNS4xMDU0IDE0OTcuMDQgNS40OTMyMiAxNTA0LjgxIDEuNjQ4MzRDMTUxNC41MiAtNC4xMTg5OCAxNTI4LjExIDUuNDkzMjIgMTU0My42NSAyNi42NDAxTDE3NDkuNDcgMjkzLjg1OUMxNzQ5LjQ3IDI5My44NTkgMTc1MS40MSAyOTUuNzgyIDE3NTUuMyAyOTUuNzgyQzE3NzAuODMgMjk1Ljc4MiAxNzQ3LjUzIDI3Mi43MTMgMTc1OS4xOCAyNTUuNDExQzE3ODguMzEgMjE2Ljk2MiAxODg5LjI4IDI3Mi43MTMgMTk0Ny41MyAzMzQuMjMxQzIwMjkuMDkgNDEzLjA1MSAyMTM3LjgzIDUzMi4yNDIgMjI1NC4zMyA2MDMuMzcyQzIyODEuNTIgNjIwLjY3NCAyMjk4Ljk5IDYwNS4yOTUgMjMyMi4zIDYxOC43NTJDMjM5NC4xNCA2NjEuMDQ2IDIzMTAuNjQgNzU5LjA5IDIyNDguNTEgNzU3LjE2OEMyMTc2LjY2IDc2Mi45MzUgMjEyOC4xMiA3MDEuNDE3IDIwODMuNDYgNjUxLjQzNEwxOTMwLjA2IDQ2Ni44NzlDMTkxNC41MiA0NDcuNjU1IDE5MDAuOTMgNDM5Ljk2NSAxODg3LjM0IDQ0NS43MzJDMTg3OS41NyA0NDkuNTc3IDE4ODMuNDYgNDYzLjAzNCAxODg3LjM0IDQ2OC44MDJDMTkwNC44MSA0OTUuNzE2IDE5MjIuMjkgNTI0LjU1MiAxOTMzLjk0IDU1NS4zMTFDMjAxMS42MSA3NDEuNzg4IDE4ODkuMjggODEwLjk5NiAxNzIwLjM1IDczNC4wOTlDMTYxNS40OSA2ODYuMDM3IDE1MjYuMTcgNTkzLjc2IDE0NjkuODYgNDk5LjU2MUMxNDY3LjkyIDQ5NS43MTYgMTQ2NS45NyA0OTMuNzkzIDE0NjIuMDkgNDkzLjc5M0gxMzg4LjNDMTM4NC40MiA0OTMuNzkzIDEzODAuNTQgNDkxLjg3MSAxMzc4LjU5IDQ4OC4wMjZDMTM3NC43MSA0NzguNDE0IDEzNTUuMjkgMzk5LjU5NCAxMzUzLjM1IDM4OS45ODJDMTM0OS40NyAzNzYuNTI0IDEzMzkuNzYgMzcyLjY4IDEzMjguMTEgMzcyLjY4QzEzMTguNCAzNzIuNjggMTMxMC42MyAzNzguNDQ3IDEzMTQuNTIgMzkzLjgyNkwxMzYzLjA2IDYxNi44M0MxMzY0Ljc5IDYyNC42NzMgMTM1OS4xOCA2MjYuNDQyIDEzNTMuMzUgNjI2LjQ0MkgxMTk4LjAxQzExOTEuOTMgNjI2LjQ0MiAxMTg4LjkyIDYyNS4zNDYgMTE4OC4zIDYxOC43NTJMMTE3OC44OCA0NjMuODYxQzExNzYuOTQgNDM2Ljk0NyAxMTM3LjgyIDQzOC4wNDMgMTEzNy44MiA0NjQuOTU3QzExMzUuODcgNTA1LjMyOCAxMTM1Ljg3IDUzMC4zMiAxMTE2LjQ2IDU2Ni44NDZDMTA2OS44NSA2NTkuMTIzIDgxNS40ODEgNjc0LjUwMyA3ODIuNDcxIDU2Ni44NDZDNzc2LjY0NiA1NDcuNjIyIDc3Ni42NDYgNTI4LjM5NyA3ODAuNTI5IDUxMS4wOTVDNzgyLjQ3MSA1MDEuNDgzIDc4Ny43MzMgNDg1LjkzMSA3OTIuMTggNDcyLjY0N0M3OTUuMjI5IDQ2My41NTMgNzkwLjIzOCA0NTEuNSA3NzguNTg4IDQ0Ny42NTVDNzY3LjI2NyA0NDQuNDQ0IDc1Ni4wMjQgNDQ5LjE3NCA3NTAuNTg3IDQ2MS4yMDhDNzQxLjkwOCA0ODAuNDEzIDcyOS45MDcgNTEzLjQyMiA3MjYuMTYgNTI0LjU1MkM3MTQuNTA5IDU1NS4zMTEgNzAyLjg1OSA1ODYuMDcxIDcwMi44NTkgNjE0LjkwN0M3MDAuOTE3IDYzMC4yODcgNzA4LjY4NCA2NDEuODIxIDcxNi40NTEgNjUzLjM1NkM3MjQuMjE4IDY2Ni44MTMgNzI0LjIxOCA2ODQuMTE1IDcxOC4zOTMgNjk5LjQ5NUM3MDYuNzQyIDczMC4yNTQgNjczLjczMiA3NTEuNDAxIDYzOC43OCA3NTkuMDlDNTY2LjkzNSA3NzYuMzkyIDQ4OS4yNjQgNzU3LjE2OCA0OTguOTczIDY2Ni44MTNDNTAyLjg1NiA2MjAuNjc0IDU3Ni42NDQgNTExLjA5NSA1OTkuOTQ1IDQ2My4wMzRDNjA1Ljc3IDQ1MS41IDU5NC4xMTkgNDQ1LjczMiA1ODYuMzUyIDQ0NS43MzJDNTc0LjcwMiA0NDUuNzMyIDU2OC44NzYgNDUzLjQyMiA1NjMuMDUxIDQ1OS4xODlDNTM5Ljc1IDQ4NC4xODEgNTE0LjUwNyA1MjAuNzA4IDQ3OS41NTUgNTU1LjMxMUMzODIuNDY2IDY0OS41MTEgMjI3LjEyNSA3NjguNzAyIDk4Ljk2OCA3NjQuODU4Qy0xMTYuNTY5IDc1NS4yNDUgNzUuNjY2NyA1MDMuNDA2IDE1My4zMzggNDMyLjI3NUMyMzguNzc1IDM1Ny4zIDMyOC4wOTcgMjkwLjAxNSA0MjkuMDY5IDI1NS40MTFDNDY5Ljg0NiAyNDEuOTU0IDU1MS40MDEgMjI4LjQ5NiA1MjguMDk5IDI5MS45MzdDNTEwLjYyMyAzMzIuMzA4IDQ2NC4wMjEgMzgyLjI5MiA0MjMuMjQ0IDQwMy40MzlDNDA3LjcxIDQxMS4xMjggMzc2LjY0MSA0MTguODE4IDM3MC44MTYgNDA3LjI4NEMzNjEuMTA3IDM4Ni4xMzcgMzk2LjA1OSAzNjMuMDY3IDQxMS41OTMgMzQ3LjY4OEM0MzEuMDExIDMzMi4zMDggNDE5LjM2IDMyNC42MTkgMzk4LjAwMSAzMzIuMzA4QzM2NC45OTEgMzQ1Ljc2NSAzMDAuOTEyIDQwMy40MzkgMzE0LjUwNSA0MzguMDQzQzMyNi4xNTUgNDYzLjAzNCAzOTAuMjM0IDQ1My40MjIgNDE5LjM2IDQzOS45NjVDNDU0LjMxMiA0MjQuNTg1IDQ4MC41MDcgNDA3Ljg3OSA1MTAuNjIzIDM3Mi42OEM1NTIuNjI0IDMyMy42IDc0NS41NzggNDMuOTQyMSA3NTkuMTcgMjYuNjQwMUM3NzQuNzA0IDUuNDkzMjIgNzg0LjQxMyAtMi4xOTY1NCA3OTYuMDY0IDMuNTcwNzhDODAzLjgzMSA3LjQxNTY2IDgwNS43NzIgMTcuMDI3OSA3OTIuMTggNDMuOTQyMUw2NjQuMDIzIDI4Ni4xN0M2NjIuMDgxIDI5MS45MzcgNjY1Ljk2NSAyOTUuNzgyIDY2OS44NDkgMjk1Ljc4MkM2NzMuNzMyIDI5NS43ODIgNjc3LjYxNiAyOTUuNzgyIDY4My40NDEgMjg4LjA5MkM3MjAuMzM1IDI0Ny43MjEgNzUxLjQwMyAyNDAuMDMxIDc3OC41ODggMjQ1Ljc5OEM4MjEuMzA3IDI1NS40MTEgODE5LjM2NSAyOTAuMDE1IDgxMS41OTggMzExLjE2MUM4MDcuNzE0IDMyMi42OTYgODE1LjQ4MSAzMzQuMjMxIDgyNy4xMzIgMzM0LjIzMUM4MzQuODk5IDMzNC4yMzEgODQyLjY2NiAzMjguNDYzIDg0NC42MDggMzIyLjY5Nkw4NjcuOTA5IDI1MS41NjZDODY5Ljg1MSAyNDcuNzIxIDg3My43MzQgMjQ1Ljc5OCA4NzcuNjE4IDI0NS43OThIOTc0LjcwN0M5ODAuNTMyIDI0NS43OTggOTg2LjM1NyAyNTEuNTY2IDk4NC40MTUgMjU3LjMzM0w5NTMuMzQ3IDQxOC44MThDOTUxLjQwNSA0MjYuNTA4IDk1My4zNDcgNDQxLjg4NyA5NzAuODIzIDQ0MS44ODdDOTgyLjQ3NCA0NDEuODg3IDk5Mi4xODIgNDM0LjE5OCA5OTQuMTI0IDQxOC44MThMMTAxNy40MyAyNTMuNDg4QzEwMTcuNDMgMjQ5LjY0MyAxMDIzLjI1IDI0NS43OTggMTAyNy4xMyAyNDUuNzk4SDExMjYuMTZDMTEzMC4wNSAyNDUuNzk4IDExMzMuOTMgMjQ5LjY0MyAxMTMzLjkzIDI1NS40MTFWMzE2LjY2QzExMzMuOTMgMzI3LjIxNCAxMTQyLjQyIDMzNi4wMTkgMTE1My4wOCAzMzYuMTM0QzExNjIuOTIgMzM2LjI0OSAxMTcwLjgzIDMzMC41MDEgMTE3MC44MyAzMTYuOTFMMTE2Ni45NCAyNTUuMzkxQzExNjYuOTQgMjQ5LjYyNCAxMTcwLjgzIDI0NS43NzkgMTE3Ni42NSAyNDUuNzc5SDEyNzUuNjhDMTI3OS41NiAyNDUuNzc5IDEyODMuNDUgMjQ5LjYyNCAxMjgzLjQ1IDI1My40NjlMMTI5MS4yMiAyODkuOTk1QzEyOTMuMTYgMjk3LjY4NSAxMzA0LjgxIDI5Ny42ODUgMTMwNi43NSAyODkuOTk1QzEzMTQuNTIgMjU5LjIzNiAxMzM5Ljc2IDI0NS43NzkgMTM2OC44OSAyNDUuNzc5QzEzODguMyAyNDUuNzc5IDE0MDkuNjYgMjQ5LjYyNCAxNDI1LjIgMjYzLjA4MUMxNDMxLjAyIDI2Ni45MjYgMTQzNi44NSAyNzguNDYxIDE0NDIuNjcgMjcyLjY5M0MxNDc3LjYzIDIzMi4zMjIgMTU0MS43IDI0MC4wMTIgMTU4Mi40OCAyNjYuOTI2QzE2MDMuODQgMjgwLjM4MyAxNjI1LjIgMjk5LjYwOCAxNjM4Ljc5IDMyMC43NTRDMTY1Ni4yNyAzNDUuNzQ2IDE2NzcuNjMgMzg5Ljk2MiAxNjY0LjA0IDQwNS4zNDJDMTY1MC40NCA0MjQuNTY2IDE2MDUuNzggNDEzLjAzMiAxNTgyLjQ4IDM3Mi42NkMxNTc4LjYgMzY0Ljk3MSAxNTcyLjc3IDM1My40MzYgMTU2OC44OSAzNDcuNjY5QzE1NjEuMTIgMzM2LjEzNCAxNTQ1LjU5IDMyOC40NDQgMTUzNy44MiAzMzkuOTc5QzE1MzEuOTkgMzQ3LjY2OSAxNTM3LjgyIDM2My4wNDggMTU0MS43IDM3Mi42NkMxNTYxLjEyIDQxMy4wMzIgMTU5OS45NiA0NDEuODY4IDE2NDAuNzMgNDUxLjQ4QzE3NDEuNzEgNDcyLjYyNyAxNzMyIDQwMy40MTkgMTY5MS4yMiAzNDMuODI0VjM0My44NDNaIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4K" alt="Church logo"><canvas id="c2"></canvas></button>
+</main>
+<div class="bar">
+  <button class="sw" data-c="#ffffff" style="background:#ffffff" aria-label="White background" aria-pressed="true"></button>
+  <button class="sw" data-c="#d4f70a" style="background:#d4f70a" aria-label="Lime background" aria-pressed="false"></button>
+  <button class="sw" data-c="#fd1f00" style="background:#fd1f00" aria-label="Red background" aria-pressed="false"></button>
+  <button class="sw" data-c="#e847e7" style="background:#e847e7" aria-label="Pink background" aria-pressed="false"></button>
+  <button id="clear">Clear bats</button>
+  <button id="export" hidden>Export PNG</button>
+</div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let W,H,DPR;
+function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+addEventListener('resize',resize);resize();
+
+const logo=document.getElementById('logo');
+let pointer={x:W/2,y:H/2,t:-1e9};
+addEventListener('pointermove',e=>{pointer={x:e.clientX,y:e.clientY,t:performance.now()}});
+
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const ang=(a)=>{while(a>Math.PI)a-=2*Math.PI;while(a<-Math.PI)a+=2*Math.PI;return a};
+const spiders=[];
+
+// Bat silhouette traced from the reference image (x: -1..1, y: down), flapped by rotating the wings at the shoulders
+const BAT=[[-1.0,-0.527],[-1.0,-0.504],[-0.994,-0.498],[-0.994,-0.476],[-0.989,-0.47],[-0.989,-0.441],[-0.983,-0.436],[-0.983,-0.413],[-0.977,-0.407],[-0.977,-0.39],[-0.972,-0.385],[-0.972,-0.351],[-0.966,-0.345],[-0.966,-0.328],[-0.955,-0.305],[-0.949,-0.265],[-0.943,-0.26],[-0.943,-0.248],[-0.932,-0.226],[-0.932,-0.209],[-0.915,-0.174],[-0.915,-0.157],[-0.909,-0.152],[-0.903,-0.123],[-0.881,-0.078],[-0.881,-0.066],[-0.875,-0.061],[-0.869,-0.032],[-0.858,-0.015],[-0.858,-0.004],[-0.841,0.024],[-0.841,0.036],[-0.824,0.07],[-0.824,0.081],[-0.818,0.087],[-0.818,0.098],[-0.812,0.104],[-0.812,0.115],[-0.807,0.121],[-0.807,0.132],[-0.795,0.149],[-0.761,0.149],[-0.756,0.155],[-0.733,0.155],[-0.727,0.161],[-0.71,0.161],[-0.705,0.166],[-0.676,0.172],[-0.631,0.195],[-0.619,0.206],[-0.614,0.206],[-0.597,0.223],[-0.591,0.223],[-0.54,0.274],[-0.54,0.28],[-0.523,0.297],[-0.523,0.303],[-0.511,0.314],[-0.489,0.36],[-0.489,0.371],[-0.483,0.382],[-0.472,0.382],[-0.443,0.365],[-0.432,0.365],[-0.409,0.354],[-0.381,0.354],[-0.375,0.348],[-0.341,0.348],[-0.335,0.354],[-0.301,0.354],[-0.295,0.36],[-0.267,0.365],[-0.222,0.388],[-0.21,0.399],[-0.182,0.411],[-0.17,0.428],[-0.148,0.439],[-0.142,0.456],[-0.102,0.496],[-0.102,0.502],[-0.085,0.519],[-0.085,0.524],[-0.074,0.524],[-0.068,0.53],[-0.068,0.536],[-0.034,0.581],[-0.006,0.638],[0.011,0.638],[0.017,0.632],[0.045,0.57],[0.057,0.559],[0.068,0.536],[0.085,0.519],[0.085,0.513],[0.102,0.496],[0.102,0.49],[0.176,0.416],[0.182,0.416],[0.216,0.388],[0.261,0.365],[0.273,0.365],[0.295,0.354],[0.324,0.354],[0.33,0.348],[0.364,0.348],[0.369,0.354],[0.398,0.354],[0.403,0.36],[0.42,0.36],[0.438,0.371],[0.449,0.371],[0.46,0.382],[0.477,0.382],[0.483,0.354],[0.494,0.331],[0.506,0.32],[0.511,0.303],[0.528,0.286],[0.528,0.28],[0.58,0.229],[0.585,0.229],[0.602,0.212],[0.608,0.212],[0.636,0.189],[0.659,0.178],[0.67,0.178],[0.688,0.166],[0.699,0.166],[0.705,0.161],[0.722,0.161],[0.727,0.155],[0.75,0.155],[0.756,0.149],[0.795,0.149],[0.801,0.138],[0.801,0.121],[0.807,0.115],[0.807,0.104],[0.818,0.081],[0.818,0.07],[0.83,0.053],[0.835,0.024],[0.847,0.007],[0.847,-0.004],[0.869,-0.049],[0.869,-0.061],[0.875,-0.066],[0.881,-0.095],[0.892,-0.112],[0.892,-0.123],[0.898,-0.129],[0.898,-0.14],[0.903,-0.146],[0.903,-0.157],[0.909,-0.163],[0.909,-0.174],[0.915,-0.18],[0.915,-0.191],[0.92,-0.197],[0.92,-0.209],[0.932,-0.231],[0.932,-0.248],[0.938,-0.254],[0.938,-0.265],[0.949,-0.288],[0.949,-0.305],[0.955,-0.311],[0.955,-0.328],[0.96,-0.334],[0.96,-0.362],[0.966,-0.368],[0.966,-0.385],[0.972,-0.39],[0.972,-0.413],[0.977,-0.419],[0.977,-0.441],[0.983,-0.447],[0.983,-0.47],[0.989,-0.476],[0.989,-0.498],[0.994,-0.504],[0.994,-0.527],[0.983,-0.527],[0.977,-0.521],[0.96,-0.521],[0.955,-0.515],[0.926,-0.515],[0.903,-0.504],[0.886,-0.504],[0.881,-0.498],[0.869,-0.498],[0.847,-0.487],[0.83,-0.487],[0.824,-0.481],[0.812,-0.481],[0.807,-0.476],[0.778,-0.47],[0.761,-0.459],[0.75,-0.459],[0.733,-0.447],[0.722,-0.447],[0.705,-0.436],[0.693,-0.436],[0.676,-0.424],[0.665,-0.424],[0.636,-0.407],[0.625,-0.407],[0.614,-0.396],[0.58,-0.379],[0.568,-0.379],[0.557,-0.373],[0.545,-0.362],[0.506,-0.345],[0.494,-0.334],[0.438,-0.305],[0.426,-0.294],[0.42,-0.294],[0.409,-0.282],[0.403,-0.282],[0.392,-0.271],[0.386,-0.271],[0.375,-0.26],[0.352,-0.248],[0.341,-0.237],[0.352,-0.237],[0.364,-0.226],[0.364,-0.191],[0.358,-0.186],[0.352,-0.157],[0.341,-0.14],[0.341,-0.129],[0.312,-0.072],[0.301,-0.061],[0.284,-0.027],[0.233,0.03],[0.227,0.03],[0.21,0.047],[0.165,0.07],[0.153,0.07],[0.148,0.076],[0.125,0.076],[0.119,0.081],[0.114,0.076],[0.114,0.064],[0.131,0.041],[0.131,0.013],[0.125,0.007],[0.125,-0.021],[0.119,-0.027],[0.119,-0.055],[0.114,-0.061],[0.114,-0.095],[0.108,-0.101],[0.108,-0.123],[0.102,-0.129],[0.097,-0.118],[0.097,-0.106],[0.091,-0.101],[0.091,-0.084],[0.085,-0.078],[0.085,-0.066],[0.074,-0.044],[0.074,-0.027],[0.057,-0.004],[0.045,-0.004],[0.04,-0.01],[0.023,-0.01],[0.017,-0.015],[-0.023,-0.015],[-0.028,-0.01],[-0.051,-0.01],[-0.062,-0.004],[-0.08,-0.027],[-0.08,-0.044],[-0.085,-0.049],[-0.085,-0.061],[-0.091,-0.066],[-0.091,-0.078],[-0.097,-0.084],[-0.097,-0.101],[-0.102,-0.106],[-0.102,-0.118],[-0.108,-0.129],[-0.114,-0.118],[-0.114,-0.095],[-0.119,-0.089],[-0.119,-0.055],[-0.125,-0.049],[-0.125,-0.021],[-0.131,-0.015],[-0.131,0.013],[-0.136,0.019],[-0.136,0.041],[-0.114,0.076],[-0.125,0.081],[-0.131,0.076],[-0.153,0.076],[-0.159,0.07],[-0.17,0.07],[-0.205,0.053],[-0.216,0.041],[-0.222,0.041],[-0.284,-0.021],[-0.284,-0.027],[-0.318,-0.072],[-0.33,-0.101],[-0.341,-0.112],[-0.341,-0.123],[-0.358,-0.152],[-0.358,-0.163],[-0.369,-0.186],[-0.369,-0.203],[-0.375,-0.209],[-0.375,-0.22],[-0.369,-0.231],[-0.358,-0.237],[-0.358,-0.243],[-0.375,-0.26],[-0.392,-0.265],[-0.455,-0.311],[-0.511,-0.339],[-0.523,-0.351],[-0.648,-0.413],[-0.659,-0.413],[-0.688,-0.43],[-0.699,-0.43],[-0.716,-0.441],[-0.727,-0.441],[-0.773,-0.464],[-0.784,-0.464],[-0.79,-0.47],[-0.801,-0.47],[-0.807,-0.476],[-0.818,-0.476],[-0.824,-0.481],[-0.835,-0.481],[-0.841,-0.487],[-0.852,-0.487],[-0.875,-0.498],[-0.892,-0.498],[-0.898,-0.504],[-0.909,-0.504],[-0.915,-0.51],[-0.932,-0.51],[-0.955,-0.521],[-0.983,-0.521],[-0.989,-0.527]];
+class Bat{
+  constructor(x,y){
+    this.x=x;this.y=y;this.base=rnd(14,30)*(W<600?0.6:1);this.born=performance.now();
+    this.h=rnd(0,Math.PI*2);this.speed=rnd(120,200)*(W<600?0.65:1);this.wander=null;
+    this.size=1;this.phase=rnd(0,6.28);this.flap=rnd(9,13);this.wob=rnd(0,6.28);this.vx=0;this.vy=0;this.bank=0;
+  }
+  update(dt,now){
+    const age=(now-this.born)/1000,grow=Math.max(0,Math.min(1,age/0.4));
+    this.size=this.base*(1-Math.pow(1-grow,3));
+    if(!this.wander||Math.hypot(this.wander.x-this.x,this.wander.y-this.y)<60)this.wander={x:rnd(40,W-40),y:rnd(40,H-40)};
+    const want=Math.atan2(this.wander.y-this.y,this.wander.x-this.x);
+    this.wob+=dt*3;
+    this.h+=ang(want-this.h)*Math.min(1,dt*1.8)+Math.sin(this.wob)*dt*1.6;
+    const boost=1+3*Math.max(0,1-age/0.8);
+    const sp=this.speed*boost*Math.min(1,grow*3);
+    this.vx=Math.cos(this.h)*sp;this.vy=Math.sin(this.h)*sp;
+    this.x+=this.vx*dt;this.y+=this.vy*dt;
+    this.phase+=dt*this.flap*(1+0.5*Math.max(0,1-age/0.8));
+    // lean into the direction of travel
+    const lean=Math.cos(this.h)*0.35*Math.min(1,sp/this.speed);
+    this.bank+=(lean-this.bank)*Math.min(1,dt*4);
+  }
+  draw(ink,c=ctx){
+    const s=this.size;if(s<0.5)return;
+    const S=s*2.4,th=0.85*Math.sin(this.phase),ct=Math.cos(th),st=Math.sin(th);
+    c.save();c.translate(this.x,this.y-Math.sin(this.phase)*s*0.25);c.rotate(this.bank);c.fillStyle=ink;
+    c.beginPath();
+    for(let i=0;i<BAT.length;i++){
+      let x=BAT[i][0],y=BAT[i][1];
+      const w=Math.min(1,Math.max(0,(Math.abs(x)-0.2)/0.5));
+      if(w>0){
+        const sg=x<0?-1:1,px=0.18*sg,py=0.05,dx=x-px,dy=y-py;
+        // wings swing toward / away from the viewer (rotation about the vertical axis) with perspective
+        const z=Math.abs(dx)*st,pr=1/(1-0.4*z);
+        x+=(px+dx*ct*pr-x)*w;y+=(py+dy*pr-y)*w;
+      }
+      if(i===0)c.moveTo(x*S,y*S);else c.lineTo(x*S,y*S);
+    }
+    c.closePath();c.fill();
+    c.restore();
+  }
+}
+
+function spawn(){
+  const r=logo.getBoundingClientRect();
+  const count=Math.floor(rnd(2,5)); // 2 to 4 bats per click, staggered slightly
+  const start=spiders.length;
+  const spread=rnd(0,Math.PI*2);
+  for(let i=0;i<count;i++){
+    const sx=r.left+r.width*rnd(.15,.85),sy=r.top+r.height*rnd(.35,.75);
+    const sp=new Bat(sx,sy);
+    // fan out evenly around the full circle, with a little jitter
+    sp.h=spread+i*(Math.PI*2/count)+rnd(-.25,.25);
+    const dist=rnd(300,600)*(W<600?0.6:1);
+    sp.wander={x:Math.max(40,Math.min(W-40,sx+Math.cos(sp.h)*dist)),y:Math.max(40,Math.min(H-40,sy+Math.sin(sp.h)*dist))};
+    sp.born=performance.now()+i*30+rnd(0,40);
+    spiders.push(sp);
+  }
+  while(spiders.length>45)spiders.shift();
+  // 3D perspective tilt: the logo heaves away from the direction the spider crawls out
+  const h=rnd(0,Math.PI*2),ry=-Math.cos(h)*58,rx=Math.sin(h)*44;
+  const T=(a,b,z,s)=>`perspective(450px) rotateX(${a}deg) rotateY(${b}deg) translateZ(${z}px) scale(${s})`;
+  logo.animate([
+    {transform:T(0,0,0,1),offset:0},
+    {transform:T(rx,ry,120,1.05),offset:.18,easing:'ease-out'},
+    {transform:T(-rx*.65,-ry*.65,-70,.95),offset:.45},
+    {transform:T(rx*.3,ry*.3,40,1.02),offset:.68},
+    {transform:T(-rx*.1,-ry*.1,0,1),offset:.86},
+    {transform:T(0,0,0,1),offset:1}
+  ],{duration:1300,easing:'cubic-bezier(.3,.7,.3,1)'});
+}
+logo.addEventListener('click',spawn);
+document.getElementById('clear').onclick=()=>{spiders.length=0};
+
+const swatches=[...document.querySelectorAll('.sw')];
+swatches.forEach(b=>b.addEventListener('click',()=>{
+  document.documentElement.style.setProperty('--bg',b.dataset.c);
+  swatches.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+}));
+
+const oc=document.getElementById('c2'),octx=oc.getContext('2d'),main=document.querySelector('main');
+const maskUrl='url("'+logo.querySelector('img').src+'")';
+oc.style.setProperty('-webkit-mask-image',maskUrl);oc.style.setProperty('mask-image',maskUrl);
+
+// PNG export (needs the viewer's downloads capability; button stays hidden without it)
+let dl=null;
+const exportBtn=document.getElementById('export');
+if(window.claude&&claude.use){claude.use('downloads').then(d=>{if(d){dl=d;exportBtn.hidden=false}}).catch(()=>{})}
+exportBtn.addEventListener('click',async()=>{
+  if(!dl)return;
+  const label=exportBtn.textContent;
+  try{
+    const cs=getComputedStyle(document.documentElement);
+    const bgc=cs.getPropertyValue('--bg').trim()||'#ffffff',inkc=cs.getPropertyValue('--ink').trim()||'#000000';
+    const sc=Math.min(Math.max(2,DPR),4096/Math.max(W,H));
+    const ex=document.createElement('canvas');ex.width=Math.round(W*sc);ex.height=Math.round(H*sc);
+    const c=ex.getContext('2d');c.scale(sc,sc);
+    c.fillStyle=bgc;c.fillRect(0,0,W,H);
+    for(const s of spiders)s.draw(inkc,c);
+    const img=logo.querySelector('img');if(!img.complete)await img.decode();
+    const mr=main.getBoundingClientRect(),lx=mr.left+logo.offsetLeft,ly=mr.top+logo.offsetTop,lw=logo.offsetWidth,lh=logo.offsetHeight;
+    c.drawImage(img,lx,ly,lw,lh);
+    // spiders over the logo are drawn in the background color, clipped to the logo shape
+    const ov=document.createElement('canvas');ov.width=ex.width;ov.height=ex.height;
+    const o=ov.getContext('2d');o.scale(sc,sc);
+    for(const s of spiders)s.draw(bgc,o);
+    o.globalCompositeOperation='destination-in';
+    o.drawImage(img,lx,ly,lw,lh);
+    c.drawImage(ov,0,0,W,H);
+    const blob=await new Promise((res,rej)=>ex.toBlob(b=>b?res(b):rej(new Error('toBlob failed')),'image/png'));
+    await dl.save({filename:'bat-logo.png',data:blob});
+  }catch(err){
+    if(!err||err.code!=='declined'){exportBtn.textContent='Export failed';setTimeout(()=>{exportBtn.textContent=label},2000)}
+  }
+});
+
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000);last=now;
+  ctx.clearRect(0,0,W,H);
+  const ink=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#000';
+  // overlay lives inside the logo and is masked to the logo shape: spiders turn white over it
+  const mr=main.getBoundingClientRect(),lw=logo.offsetWidth,lh=logo.offsetHeight;
+  if(oc.width!==Math.round(lw*DPR)||oc.height!==Math.round(lh*DPR)){oc.width=Math.round(lw*DPR);oc.height=Math.round(lh*DPR)}
+  octx.setTransform(DPR,0,0,DPR,0,0);octx.clearRect(0,0,lw,lh);
+  octx.translate(-(mr.left+logo.offsetLeft),-(mr.top+logo.offsetTop));
+  const bgc=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#ffffff';
+  for(const s of spiders){s.update(dt,now);s.draw(ink);s.draw(bgc,octx)}
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
